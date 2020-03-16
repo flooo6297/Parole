@@ -4,6 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 from datetime import datetime, timedelta
+from threading import Timer
 
 smtp_url = ""
 smtp_port = 0
@@ -67,3 +68,58 @@ def send_email(address, parole, date_string, host):
     print(s.login(mail_address, mail_password))
     s.send_message(msg)
     s.quit()
+
+
+def load_config():
+    global smtp_url
+    global smtp_port
+    global mail_address
+    global mail_password
+    global debug_level
+    config_data = load_data_from_file("/etc/DailyPassword/dailyPassword.conf")
+    for entry in config_data:
+        config_line = filter_comments_from_line(entry)
+        if len(config_line) > 0:
+            split_config = config_line.split("=")
+            if len(split_config) > 1:
+                for i in range(1, len(split_config)):
+                    if split_config[0] == "smtp_url":
+                        smtp_url += split_config[i]
+                    if split_config[0] == "smtp_port":
+                        smtp_port += int(split_config[i])
+                    if split_config[0] == "mail_address":
+                        mail_address += split_config[i]
+                    if split_config[0] == "mail_password":
+                        mail_password += split_config[i]
+                    if split_config[0] == "debug_level":
+                        debug_level += int(split_config[i])
+    return ""
+
+
+def send_newsletters():
+    load_config()
+    host = get_host_names()
+    current_date_string = get_current_date()
+    parole_for_today = get_random_line(load_data_from_file("/etc/DailyPassword/WordDatabase/de_DE_frami.txt"))
+
+    email_addresses = load_data_from_file("/etc/DailyPassword/addresses.txt")
+
+    for entry in email_addresses:
+        address = filter_comments_from_line(entry)
+        if len(address) > 2:
+            send_email(address, parole_for_today, current_date_string, host)
+    start_timer()
+
+
+def start_timer():
+    x = datetime.today()
+    # y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0) + timedelta(days=1)
+    y = x + timedelta(seconds=10)
+    delta_t = y - x
+
+    secs = delta_t.total_seconds()
+
+    t = Timer(secs, send_newsletters)
+    t.start()
+
+start_timer()
