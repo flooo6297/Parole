@@ -20,7 +20,7 @@ def load_data_from_file(path):
 
 
 def get_host_names():
-    host_list = load_data_from_file("/etc/DailyPassword/host.txt")
+    host_list = load_data_from_file("/etc/Parole/host.txt")
     if len(host_list) > 0:
         return host_list[0]
     else:
@@ -76,7 +76,7 @@ def load_config():
     global mail_address
     global mail_password
     global debug_level
-    config_data = load_data_from_file("/etc/DailyPassword/dailyPassword.conf")
+    config_data = load_data_from_file("/etc/Parole/dailyPassword.conf")
     for entry in config_data:
         config_line = filter_comments_from_line(entry)
         if len(config_line) > 0:
@@ -100,9 +100,9 @@ def send_newsletters():
     load_config()
     host = get_host_names()
     current_date_string = get_current_date()
-    parole_for_today = get_random_line(load_data_from_file("/etc/DailyPassword/WordDatabase/de_DE_frami.txt"))
+    parole_for_today = get_random_line(load_data_from_file("/etc/Parole/WordDatabase/de_DE_frami.txt"))
 
-    email_addresses = load_data_from_file("/etc/DailyPassword/addresses.txt")
+    email_addresses = load_data_from_file("/etc/Parole/addresses.txt")
 
     for entry in email_addresses:
         address = filter_comments_from_line(entry)
