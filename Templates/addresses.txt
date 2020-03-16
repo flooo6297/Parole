@@ -1,0 +1,6 @@
+##  This is the file in which you can add e-Mail addresses,
+##  which should receive the daily password.
+##
+##  you need to add them like this:     (without these -> ##)
+
+##testmail@gmail.com
