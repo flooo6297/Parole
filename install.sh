@@ -4,7 +4,7 @@ CONFIGDIRECTORY="/etc/Parole"
 
 echo "creating directorys..."
 mkdir -p "$CONFIGDIRECTORY/WordDatabase"
-mkdir -p /opt/DailyPassword
+mkdir -p /opt/Parole
 
 echo "copying all the config files..."
 cp -f "Templates/de_DE_frami.txt" "$CONFIGDIRECTORY/WordDatabase"
