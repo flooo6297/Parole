@@ -1,0 +1,10 @@
+[Unit]
+Description=Start the Parole Service.
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/Parole
+ExecStart=python3 /opt/Parole/Parole.py
+
+[Install]
+WantedBy=multi-user.target
