@@ -153,7 +153,7 @@ def display_parole_on_screen(parole):
     draw_red = ImageDraw.Draw(red_image)
 
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
-    epd.sleep()
+    # epd.sleep()
 
 
 start_timer(True)
