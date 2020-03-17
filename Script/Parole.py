@@ -5,7 +5,7 @@ from email.mime.text import MIMEText
 
 from datetime import datetime, timedelta
 from threading import Timer
-from waveshare_epd import epd2in7b
+from libs import epd2in7b
 from PIL import Image, ImageDraw, ImageFont
 
 smtp_url = ""

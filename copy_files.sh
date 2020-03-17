@@ -11,6 +11,7 @@ cp -f "Templates/de_DE_frami.txt" "$CONFIGDIRECTORY/WordDatabase"
 
 cp -f "Script/Parole.py" "/opt/Parole"
 cp -fr "Script/Fonts" "/opt/Parole"
+cp -fr "Script/libs" "/opt/Parole"
 chmod 755 /opt/Parole/Parole.py
 
 cp -n "Templates/addresses.txt" "$CONFIGDIRECTORY"
