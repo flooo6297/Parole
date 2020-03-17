@@ -1,7 +1,8 @@
 #!/bin/bash
 
-git clone git@github.com:flooo6297/Parole.git Parole
-cd Parole || exit
+mkdir -p /tmp/Parole
+git clone git://github.com/flooo6297/Parole.git /tmp/Parole
+cd /tmp/Parole || exit
 sh copy_files.sh
 cd ..
 rm -Rf Parole
