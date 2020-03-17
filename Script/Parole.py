@@ -1,5 +1,6 @@
 import random
 import smtplib
+from array import array
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
@@ -8,7 +9,6 @@ from threading import Timer
 
 from libs import epd2in7b
 from PIL import Image, ImageDraw, ImageFont
-
 
 smtp_url = ""
 smtp_port = 0
@@ -113,7 +113,7 @@ def send_newsletters():
         address = filter_comments_from_line(entry)
         if len(address) > 2:
             send_email(address, parole_for_today, current_date_string, host)
-    display_on_screen(parole_for_today)
+    display_parole_on_screen(parole_for_today)
     start_timer()
 
 
@@ -139,15 +139,51 @@ def start_timer(start_now=False):
     t.start()
 
 
-def display_on_screen(parole):
+def display_parole_on_screen(parole=""):
     epd.init()
     # epd.Clear()
     black_image = Image.new('1', (epd.height, epd.width), 255)
     draw_black = ImageDraw.Draw(black_image)
-    draw_black.text((2, 0), parole, font=font_24, fill=0)
-
     red_image = Image.new('1', (epd.height, epd.width), 255)
     draw_red = ImageDraw.Draw(red_image)
+
+    margin = 2
+
+    headline = "Parole für heute:"
+
+    headline_size_x, headline_size_y = draw_red.textsize(headline, font=font_24)
+    headline_offset = font_24.getoffset(headline)
+
+    draw_red.text((margin, 0), headline, font=font_24)
+    draw_red.line([(0, headline_size_y + headline_offset[1]), (epd.height, headline_size_y + headline_offset[1])], fill=0)
+
+    text_size_x, text_size_y = draw_black.textsize(parole, font=font_24)
+
+    word_list = []
+
+    current_x = 0
+    current_y = text_size_y
+
+    current_word = ""
+    for char in parole:
+        char_size_x, char_size_y = draw_black.textsize(char, font=font_24)
+        if current_x + char_size_x < epd.height - (margin * 2):
+            current_x += char_size_x
+            current_word += char
+        else:
+            word_list.append(current_word)
+            current_word = char
+            current_y += char_size_y
+            current_x = char_size_x
+    word_list.append(current_word)
+
+    if len(word_list) < 2:
+        draw_black.text((margin, headline_size_y + headline_offset[1]), parole, font=font_24, fill=0)
+    else:
+        current_y = headline_size_y + headline_offset[1]
+        for word in word_list:
+            draw_black.text((margin, current_y), word, font=font_24, fill=0)
+            current_y += text_size_y
 
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
     epd.sleep()
@@ -157,5 +193,7 @@ load_config()
 s = smtplib.SMTP_SSL(smtp_url, smtp_port)
 s.set_debuglevel(debug_level)
 print(s.login(mail_address, mail_password))
+
+# display_parole_on_screen("testtesttesttesttesttesttesttesttesttesttesttesttest")
 
 start_timer(True)
