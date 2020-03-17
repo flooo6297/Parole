@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2a74422-cf9d-4145-9d88-09697fef550e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/copy_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/copy_files.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Script/Parole.py" beforeDir="false" afterPath="$PROJECT_DIR$/Script/Parole.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +60,7 @@
       <option name="presentableId" value="Default" />
       <updated>1584390607056</updated>
       <workItem from="1584390628101" duration="3106000" />
-      <workItem from="1584438037495" duration="6715000" />
+      <workItem from="1584438037495" duration="7162000" />
     </task>
     <servers />
   </component>
