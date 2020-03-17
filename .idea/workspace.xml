@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2a74422-cf9d-4145-9d88-09697fef550e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Script/Parole.py" beforeDir="false" afterPath="$PROJECT_DIR$/Script/Parole.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/copy_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/copy_files.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +45,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Templates" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -59,10 +63,17 @@
       <option name="presentableId" value="Default" />
       <updated>1584390607056</updated>
       <workItem from="1584390628101" duration="3106000" />
+      <workItem from="1584438037495" duration="6350000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1985" y="362" key="SettingsEditor" timestamp="1584457410392">
+      <screen x="1862" y="78" width="1920" height="1040" />
+    </state>
+    <state x="1985" y="362" key="SettingsEditor/62.0.1800.1048/1862.78.1920.1040@1862.78.1920.1040" timestamp="1584457410392" />
   </component>
 </project>

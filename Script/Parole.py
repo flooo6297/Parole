@@ -5,12 +5,20 @@ from email.mime.text import MIMEText
 
 from datetime import datetime, timedelta
 from threading import Timer
+from waveshare_epd import epd2in7b
+from PIL import Image, ImageDraw, ImageFont
 
 smtp_url = ""
 smtp_port = 0
 mail_address = ""
 mail_password = ""
 debug_level = 0
+
+font_18 = ImageFont.truetype('Fonts/Font.ttc', 18)
+
+epd = epd2in7b.EPD()
+epd.init()
+epd.Clear()
 
 
 def load_data_from_file(path):
@@ -109,12 +117,22 @@ def send_newsletters():
         if len(address) > 2:
             send_email(address, parole_for_today, current_date_string, host)
     start_timer()
+    display_parole_on_screen(parole_for_today)
 
 
-def start_timer():
+def start_timer(start_now=False):
     x = datetime.today()
     # y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0) + timedelta(days=1)
-    y = x + timedelta(seconds=10)
+    # y = x + timedelta(seconds=10)
+
+    y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0)
+
+    if x < y:
+        y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0) + timedelta(days=1)
+
+    if start_now:
+        y = x + timedelta(seconds=1)
+
     delta_t = y - x
 
     secs = delta_t.total_seconds()
@@ -122,4 +140,13 @@ def start_timer():
     t = Timer(secs, send_newsletters)
     t.start()
 
-start_timer()
+
+def display_parole_on_screen(parole):
+    black_image = Image.new('1', (epd.height, epd.width), 255)
+    draw_black = ImageDraw.Draw(black_image)
+    draw_black.text((2, 0), 'hello world', font=font_18, fill=0)
+    epd.display(epd.getbuffer(black_image))
+    return parole
+
+
+start_timer(True)
