@@ -145,7 +145,11 @@ def display_parole_on_screen(parole):
     black_image = Image.new('1', (epd.height, epd.width), 255)
     draw_black = ImageDraw.Draw(black_image)
     draw_black.text((2, 0), 'hello world', font=font_18, fill=0)
-    epd.display(epd.getbuffer(black_image))
+
+    red_image = Image.new('1', (epd.height, epd.width), 255)
+    draw_red = ImageDraw.Draw(red_image)
+
+    epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
     return parole
 
 
