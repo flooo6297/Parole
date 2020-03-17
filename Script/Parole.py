@@ -5,6 +5,8 @@ from email.mime.text import MIMEText
 
 from datetime import datetime, timedelta
 from threading import Timer
+from time import sleep
+
 from libs import epd2in7b
 from PIL import Image, ImageDraw, ImageFont
 
@@ -116,8 +118,9 @@ def send_newsletters():
         address = filter_comments_from_line(entry)
         if len(address) > 2:
             send_email(address, parole_for_today, current_date_string, host)
-    start_timer()
     display_parole_on_screen(parole_for_today)
+    sleep(2)
+    start_timer(True)
 
 
 def start_timer(start_now=False):
@@ -150,6 +153,7 @@ def display_parole_on_screen(parole):
     draw_red = ImageDraw.Draw(red_image)
 
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
+    epd.sleep()
 
 
 start_timer(True)
