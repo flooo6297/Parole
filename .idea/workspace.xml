@@ -4,6 +4,7 @@
     <list default="true" id="d2a74422-cf9d-4145-9d88-09697fef550e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Script/Parole.py" beforeDir="false" afterPath="$PROJECT_DIR$/Script/Parole.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Script/libs/epdconfig.py" beforeDir="false" afterPath="$PROJECT_DIR$/Script/libs/epdconfig.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +62,7 @@
       <option name="presentableId" value="Default" />
       <updated>1584390607056</updated>
       <workItem from="1584390628101" duration="3106000" />
-      <workItem from="1584438037495" duration="8795000" />
+      <workItem from="1584438037495" duration="13227000" />
     </task>
     <servers />
   </component>

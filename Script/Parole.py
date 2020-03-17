@@ -5,10 +5,10 @@ from email.mime.text import MIMEText
 
 from datetime import datetime, timedelta
 from threading import Timer
-from time import sleep
 
 from libs import epd2in7b
 from PIL import Image, ImageDraw, ImageFont
+
 
 smtp_url = ""
 smtp_port = 0
@@ -21,6 +21,7 @@ font_24 = ImageFont.truetype('/opt/Parole/Fonts/Font.ttc', 24)
 epd = epd2in7b.EPD()
 epd.init()
 epd.Clear()
+epd.sleep()
 
 
 def load_data_from_file(path):
@@ -73,11 +74,7 @@ def send_email(address, parole, date_string, host):
     msg.attach(MIMEText(message, 'html'))
 
     # Send the message via SMTP server.
-    s = smtplib.SMTP_SSL(smtp_url, smtp_port)
-    s.set_debuglevel(debug_level)
-    print(s.login(mail_address, mail_password))
     s.send_message(msg)
-    s.quit()
 
 
 def load_config():
@@ -103,11 +100,9 @@ def load_config():
                         mail_password += split_config[i]
                     if split_config[0] == "debug_level":
                         debug_level += int(split_config[i])
-    return ""
 
 
 def send_newsletters():
-    load_config()
     host = get_host_names()
     current_date_string = get_current_date()
     parole_for_today = get_random_line(load_data_from_file("/etc/Parole/WordDatabase/de_DE_frami.txt"))
@@ -118,9 +113,8 @@ def send_newsletters():
         address = filter_comments_from_line(entry)
         if len(address) > 2:
             send_email(address, parole_for_today, current_date_string, host)
-    display_parole_on_screen(parole_for_today)
-    sleep(2)
-    start_timer(True)
+    display_on_screen(parole_for_today)
+    start_timer()
 
 
 def start_timer(start_now=False):
@@ -133,18 +127,21 @@ def start_timer(start_now=False):
     if x < y:
         y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0) + timedelta(days=1)
 
-    if start_now:
-        y = x + timedelta(seconds=1)
-
     delta_t = y - x
 
     secs = delta_t.total_seconds()
 
     t = Timer(secs, send_newsletters)
+
+    if start_now:
+        t = Timer(30, send_newsletters)
+
     t.start()
 
 
-def display_parole_on_screen(parole):
+def display_on_screen(parole):
+    epd.init()
+    # epd.Clear()
     black_image = Image.new('1', (epd.height, epd.width), 255)
     draw_black = ImageDraw.Draw(black_image)
     draw_black.text((2, 0), parole, font=font_24, fill=0)
@@ -153,7 +150,12 @@ def display_parole_on_screen(parole):
     draw_red = ImageDraw.Draw(red_image)
 
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
-    # epd.sleep()
+    epd.sleep()
 
+
+load_config()
+s = smtplib.SMTP_SSL(smtp_url, smtp_port)
+s.set_debuglevel(debug_level)
+print(s.login(mail_address, mail_password))
 
 start_timer(True)
