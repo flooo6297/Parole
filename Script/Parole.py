@@ -14,7 +14,7 @@ mail_address = ""
 mail_password = ""
 debug_level = 0
 
-font_18 = ImageFont.truetype('/opt/Parole/Fonts/Font.ttc', 18)
+font_24 = ImageFont.truetype('/opt/Parole/Fonts/Font.ttc', 24)
 
 epd = epd2in7b.EPD()
 epd.init()
@@ -144,13 +144,12 @@ def start_timer(start_now=False):
 def display_parole_on_screen(parole):
     black_image = Image.new('1', (epd.height, epd.width), 255)
     draw_black = ImageDraw.Draw(black_image)
-    draw_black.text((2, 0), 'hello world', font=font_18, fill=0)
+    draw_black.text((2, 0), parole, font=font_24, fill=0)
 
     red_image = Image.new('1', (epd.height, epd.width), 255)
     draw_red = ImageDraw.Draw(red_image)
 
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
-    return parole
 
 
 start_timer(True)
