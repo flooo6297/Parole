@@ -14,7 +14,7 @@ mail_address = ""
 mail_password = ""
 debug_level = 0
 
-font_18 = ImageFont.truetype('/opt/ParoleFonts/Font.ttc', 18)
+font_18 = ImageFont.truetype('/opt/Parole/Fonts/Font.ttc', 18)
 
 epd = epd2in7b.EPD()
 epd.init()
