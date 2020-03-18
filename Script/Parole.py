@@ -5,7 +5,6 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 from datetime import datetime, timedelta
-from threading import Timer
 from time import sleep
 
 import RPi.GPIO as GPIO
@@ -73,6 +72,14 @@ def get_current_date():
 
 
 def send_email(address, parole, date_string, host):
+    global smtp_url
+    global smtp_port
+    global mail_address
+    global mail_password
+    global debug_level
+
+    global s
+
     msg = MIMEMultipart()
     message = "Dies ist der automatisierte Parolen-Newsletter für die Wohnung von " + host \
               + "<br><br><br> Die heutige Parole lautet: <br><br>" \
@@ -82,8 +89,13 @@ def send_email(address, parole, date_string, host):
     msg['To'] = str(address)
     msg.attach(MIMEText(message, 'html'))
 
+    s = smtplib.SMTP_SSL(smtp_url, smtp_port)
+    s.set_debuglevel(debug_level)
+    print(s.login(mail_address, mail_password))
+
     # Send the message via SMTP server.
     s.send_message(msg)
+    del msg
 
 
 def load_config():
@@ -127,9 +139,6 @@ def send_newsletters(predefined_parole=""):
         if len(address) > 2:
             send_email(address, parole_for_today, current_date_string, host)
     display_parole_on_screen(parole_for_today)
-    if predefined_parole == "":
-        print("Timer starts at 1!")
-        # start_timer(False)
 
 
 def display_parole_on_screen(parole="", headline="Parole für heute:"):
@@ -180,7 +189,7 @@ def display_parole_on_screen(parole="", headline="Parole für heute:"):
     epd.sleep()
 
 
-def show_generate_new_parole_screen(btn):
+def show_generate_new_parole_screen():
     global generate_new_parole_screen_is_showing
     global new_parole
     print("show_generate_new_parole_screen")
@@ -190,7 +199,7 @@ def show_generate_new_parole_screen(btn):
         display_parole_on_screen(new_parole, "Neue Parole:")
 
 
-def generate_new_parole_for_screen(btn):
+def generate_new_parole_for_screen():
     global generate_new_parole_screen_is_showing
     global new_parole
     print("generate_new_parole_for_screen")
@@ -199,7 +208,7 @@ def generate_new_parole_for_screen(btn):
         display_parole_on_screen(new_parole, "Neue Parole:")
 
 
-def cancel_generate_new_parole_screen(btn):
+def cancel_generate_new_parole_screen():
     global generate_new_parole_screen_is_showing
     print("cancel_generate_new_parole_screen")
     if generate_new_parole_screen_is_showing:
@@ -207,19 +216,16 @@ def cancel_generate_new_parole_screen(btn):
         generate_new_parole_screen_is_showing = False
 
 
-def accept_new_parole(btn):
+def accept_new_parole():
     global new_parole
     global generate_new_parole_screen_is_showing
     print("accept_new_parole")
     if generate_new_parole_screen_is_showing:
         generate_new_parole_screen_is_showing = False
         send_newsletters(new_parole)
+    else:
+        send_newsletters()
 
-
-load_config()
-s = smtplib.SMTP_SSL(smtp_url, smtp_port)
-s.set_debuglevel(debug_level)
-print(s.login(mail_address, mail_password))
 
 # display_parole_on_screen("testtesttesttesttesttesttesttesttesttesttesttesttest")
 # start_timer(True)
@@ -229,14 +235,26 @@ button_2 = 6
 button_3 = 13
 button_4 = 19
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(button_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button_3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button_4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+load_config()
+
+s = smtplib.SMTP_SSL(smtp_url, smtp_port)
+s.set_debuglevel(debug_level)
+print(s.login(mail_address, mail_password))
+
+
+def init_buttons():
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(button_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(button_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(button_3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(button_4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 def main():
+    button_1_state = False
+    button_2_state = False
+    button_3_state = False
+    button_4_state = False
 
     x = datetime.today()
     y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0)
@@ -252,16 +270,46 @@ def main():
                 y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0) + timedelta(days=1)
                 send_newsletters()
 
-            GPIO.setmode(GPIO.BCM)
-            GPIO.setup(button_1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-            GPIO.setup(button_2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-            GPIO.setup(button_3, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-            GPIO.setup(button_4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-            if not GPIO.input(button_1):
-                print("Button was pushed!")
+            init_buttons()
+            if not GPIO.input(button_1) and not button_1_state:
+                button_1_state = True
+                print("Button1 was pushed!")
+                show_generate_new_parole_screen()
+            elif GPIO.input(button_1) and button_1_state:
+                button_1_state = False
+                print("Button1 was released!")
+
+            init_buttons()
+            if not GPIO.input(button_2) and not button_2_state:
+                button_2_state = True
+                print("Button2 was pushed!")
+                cancel_generate_new_parole_screen()
+            elif GPIO.input(button_2) and button_2_state:
+                button_2_state = False
+                print("Button2 was released!")
+
+            init_buttons()
+            if not GPIO.input(button_3) and not button_3_state:
+                button_3_state = True
+                print("Button3 was pushed!")
+                generate_new_parole_for_screen()
+            elif GPIO.input(button_3) and button_3_state:
+                button_3_state = False
+                print("Button3 was released!")
+
+            init_buttons()
+            if not GPIO.input(button_4) and not button_4_state:
+                button_4_state = True
+                print("Button4 was pushed!")
+                accept_new_parole()
+            elif GPIO.input(button_4) and button_4_state:
+                button_4_state = False
+                print("Button4 was released!")
 
             sleep(0.1)
         except KeyboardInterrupt:
+            s.quit()
+            s.close()
             break
 
     GPIO.cleanup()
