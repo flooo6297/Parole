@@ -13,6 +13,8 @@ import RPi.GPIO as GPIO
 from libs import epd2in7b
 from PIL import Image, ImageDraw, ImageFont
 
+minimal_word_length = 20
+
 smtp_url = ""
 smtp_port = 0
 mail_address = ""
@@ -46,10 +48,10 @@ def get_host_names():
         return ""
 
 
-def get_random_line(word_list):
+def get_random_line(word_list, minimum_length=1):
     random_line = word_list[random.randrange(0, len(word_list) - 1)]
     filtered_line = filter_comments_from_line(random_line)
-    while len(filtered_line) < 1:
+    while len(filtered_line) < minimum_length:
         random_line = word_list[random.randrange(0, len(word_list) - 1)]
         filtered_line = filter_comments_from_line(random_line)
     return filtered_line
@@ -128,7 +130,7 @@ def send_newsletters(predefined_parole=""):
 
     host = get_host_names()
     current_date_string = get_current_date()
-    parole_for_today = get_random_line(load_data_from_file("/etc/Parole/WordDatabase/de_DE_frami.txt"))
+    parole_for_today = get_random_line(load_data_from_file("/etc/Parole/WordDatabase/de_DE_frami.txt"), minimal_word_length)
     if predefined_parole != "":
         parole_for_today = predefined_parole
     current_parole = parole_for_today
@@ -195,7 +197,7 @@ def show_generate_new_parole_screen():
     print("show_generate_new_parole_screen")
     if not generate_new_parole_screen_is_showing:
         generate_new_parole_screen_is_showing = True
-        new_parole = get_random_line(load_data_from_file("/etc/Parole/WordDatabase/de_DE_frami.txt"))
+        new_parole = get_random_line(load_data_from_file("/etc/Parole/WordDatabase/de_DE_frami.txt"), minimal_word_length)
         display_parole_on_screen(new_parole, "Neue Parole:")
 
 
@@ -204,7 +206,7 @@ def generate_new_parole_for_screen():
     global new_parole
     print("generate_new_parole_for_screen")
     if generate_new_parole_screen_is_showing:
-        new_parole = get_random_line(load_data_from_file("/etc/Parole/WordDatabase/de_DE_frami.txt"))
+        new_parole = get_random_line(load_data_from_file("/etc/Parole/WordDatabase/de_DE_frami.txt"), minimal_word_length)
         display_parole_on_screen(new_parole, "Neue Parole:")
 
 
