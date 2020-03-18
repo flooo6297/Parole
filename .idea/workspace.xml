@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2a74422-cf9d-4145-9d88-09697fef550e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Script/Parole.py" beforeDir="false" afterPath="$PROJECT_DIR$/Script/Parole.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,16 +33,20 @@
     </option>
   </component>
   <component name="ProjectId" id="1ZE3pFeIUzI0yRfPbXO09uFq1oK" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Templates" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -59,10 +64,21 @@
       <option name="presentableId" value="Default" />
       <updated>1584390607056</updated>
       <workItem from="1584390628101" duration="3106000" />
+      <workItem from="1584438037495" duration="24508000" />
+      <workItem from="1584526573661" duration="9438000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1985" y="362" key="SettingsEditor" timestamp="1584457410392">
+      <screen x="1862" y="78" width="1920" height="1040" />
+    </state>
+    <state x="1985" y="362" key="SettingsEditor/62.0.1800.1048/1862.78.1920.1040@1862.78.1920.1040" timestamp="1584457410392" />
   </component>
 </project>
