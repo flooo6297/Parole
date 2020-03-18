@@ -234,13 +234,13 @@ class EPD:
         for i in range(0, int(self.width * self.height / 8)):
             self.send_data(~imageblack[i])
         self.send_command(0x11)
-        
+
         self.send_command(0x13)
         for i in range(0, int(self.width * self.height / 8)):
             self.send_data(~imagered[i])
         self.send_command(0x11)
-        
-        self.send_command(0x12) 
+
+        self.send_command(0x12)
         self.ReadBusy()
         
     def Clear(self):
