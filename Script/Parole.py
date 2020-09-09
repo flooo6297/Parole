@@ -8,10 +8,13 @@ from datetime import datetime, timedelta
 from time import sleep
 
 import RPi.GPIO as GPIO
-
+import re
 
 from libs import epd2in7b
 from PIL import Image, ImageDraw, ImageFont
+
+import pycurl
+from io import BytesIO
 
 minimal_word_length = 20
 
@@ -187,6 +190,25 @@ def display_parole_on_screen(parole="", headline="Parole für heute:"):
             draw_black.text((margin, current_y), word, font=font_24, fill=0)
             current_y += text_size_y
 
+    crl = pycurl.Curl()
+    b_obj = BytesIO()
+    crl.setopt(crl.URL, 'https://www.mein-laborergebnis.de/ergebnis/b3476a18-df20-41bf-b69a-c24d36b1c245')
+
+    crl.setopt(crl.WRITEDATA, b_obj)
+
+    crl.perform()
+
+    crl.close()
+
+    get_body = b_obj.getvalue()
+
+    text = get_body.decode('utf8')
+
+    x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
+
+    black_image.text(5, 50, x[0], font=font_24, fill=0)
+
+
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
     epd.sleep()
 
@@ -253,6 +275,8 @@ def init_buttons():
 
 
 def main():
+    global current_parole
+
     button_1_state = False
     button_2_state = False
     button_3_state = False
@@ -260,12 +284,17 @@ def main():
 
     x = datetime.today()
     y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0)
+    z = x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=1)
     if y < x:
         y = x.replace(day=x.day, hour=0, minute=0, second=1, microsecond=0) + timedelta(days=1)
     send_newsletters()
     while True:
         try:
             x = datetime.today()
+
+            if z < x:
+                x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=1)
+                send_newsletters(current_parole)
 
             if y < x:
                 print("Next day reached")
