@@ -293,8 +293,8 @@ def main():
             x = datetime.today()
 
             if z < x:
-                x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=1)
-                send_newsletters(current_parole)
+                x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=5)
+                display_parole_on_screen(current_parole, )
 
             if y < x:
                 print("Next day reached")

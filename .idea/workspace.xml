@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2a74422-cf9d-4145-9d88-09697fef550e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Parole.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Parole.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Script/Parole.py" beforeDir="false" afterPath="$PROJECT_DIR$/Script/Parole.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/copy_files.sh" beforeDir="false" afterPath="$PROJECT_DIR$/copy_files.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +66,7 @@
       <workItem from="1584390628101" duration="3106000" />
       <workItem from="1584438037495" duration="24508000" />
       <workItem from="1584526573661" duration="9438000" />
-      <workItem from="1599642835458" duration="2929000" />
+      <workItem from="1599642835458" duration="3227000" />
     </task>
     <task id="LOCAL-00001" summary="blah">
       <created>1599645221640</created>
@@ -79,7 +75,28 @@
       <option name="project" value="LOCAL" />
       <updated>1599645221640</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="fix">
+      <created>1599645800484</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1599645800484</updated>
+    </task>
+    <task id="LOCAL-00003" summary="fix">
+      <created>1599645860881</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1599645860881</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix">
+      <created>1599645936450</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1599645936450</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,20 +116,21 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="blah" />
-    <option name="LAST_COMMIT_MESSAGE" value="blah" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="392" y="6" key="CommitChangelistDialog2" timestamp="1599645859991">
+    <state x="392" y="6" key="CommitChangelistDialog2" timestamp="1599645935699">
       <screen x="71" y="0" width="1392" height="823" />
     </state>
-    <state x="392" y="6" key="CommitChangelistDialog2/71.0.1392.823@71.0.1392.823" timestamp="1599645859991" />
+    <state x="392" y="6" key="CommitChangelistDialog2/71.0.1392.823@71.0.1392.823" timestamp="1599645935699" />
     <state x="276" y="54" key="SettingsEditor" timestamp="1599644021742">
       <screen x="71" y="0" width="1392" height="823" />
     </state>
     <state x="276" y="54" key="SettingsEditor/71.0.1392.823@71.0.1392.823" timestamp="1599644021742" />
-    <state x="360" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599645871911">
+    <state x="360" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599645937978">
       <screen x="71" y="0" width="1392" height="823" />
     </state>
-    <state x="360" y="145" key="Vcs.Push.Dialog.v2/71.0.1392.823@71.0.1392.823" timestamp="1599645871911" />
+    <state x="360" y="145" key="Vcs.Push.Dialog.v2/71.0.1392.823@71.0.1392.823" timestamp="1599645937978" />
   </component>
 </project>
