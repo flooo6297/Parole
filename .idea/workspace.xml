@@ -67,7 +67,7 @@
       <workItem from="1584390628101" duration="3106000" />
       <workItem from="1584438037495" duration="24508000" />
       <workItem from="1584526573661" duration="9438000" />
-      <workItem from="1599642835458" duration="3925000" />
+      <workItem from="1599642835458" duration="4255000" />
     </task>
     <task id="LOCAL-00001" summary="blah">
       <created>1599645221640</created>
@@ -111,7 +111,28 @@
       <option name="project" value="LOCAL" />
       <updated>1599646275702</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="changed to only refresh when different status">
+      <created>1599646823972</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1599646823972</updated>
+    </task>
+    <task id="LOCAL-00008" summary="fix">
+      <created>1599646921260</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1599646921260</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix">
+      <created>1599646963663</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1599646963663</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,21 +152,22 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="blah" />
+    <MESSAGE value="changed to only refresh when different status" />
     <MESSAGE value="fix" />
     <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="392" y="6" key="CommitChangelistDialog2" timestamp="1599646920491">
+    <state x="392" y="6" key="CommitChangelistDialog2" timestamp="1599646962718">
       <screen x="71" y="0" width="1392" height="823" />
     </state>
-    <state x="392" y="6" key="CommitChangelistDialog2/71.0.1392.823@71.0.1392.823" timestamp="1599646920491" />
+    <state x="392" y="6" key="CommitChangelistDialog2/71.0.1392.823@71.0.1392.823" timestamp="1599646962718" />
     <state x="276" y="54" key="SettingsEditor" timestamp="1599644021742">
       <screen x="71" y="0" width="1392" height="823" />
     </state>
     <state x="276" y="54" key="SettingsEditor/71.0.1392.823@71.0.1392.823" timestamp="1599644021742" />
-    <state x="360" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599646922784">
+    <state x="360" y="145" key="Vcs.Push.Dialog.v2" timestamp="1599646965926">
       <screen x="71" y="0" width="1392" height="823" />
     </state>
-    <state x="360" y="145" key="Vcs.Push.Dialog.v2/71.0.1392.823@71.0.1392.823" timestamp="1599646922784" />
+    <state x="360" y="145" key="Vcs.Push.Dialog.v2/71.0.1392.823@71.0.1392.823" timestamp="1599646965926" />
   </component>
 </project>

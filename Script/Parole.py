@@ -261,7 +261,7 @@ def init_buttons():
     GPIO.setup(button_4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
-def check_status():
+def check_status(first=False):
     global current_status
     global current_parole
 
@@ -286,12 +286,14 @@ def check_status():
     x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
 
     current_status = x[0]
-    if current_status != "Probe in Bearbeitung":
+    if current_status != "Probe in Bearbeitung" or first:
         display_parole_on_screen(current_parole)
 
 
 def main():
     global current_parole
+
+    check_status()
 
     button_1_state = False
     button_2_state = False
