@@ -204,6 +204,8 @@ def display_parole_on_screen(parole="", headline="Parole für heute:"):
 
     text = get_body.decode('utf8')
 
+    print("checked again")
+
     x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
 
     draw_black.text((5, 100), x[0], font=font_24, fill=0)
@@ -294,7 +296,8 @@ def main():
 
             if z < x:
                 x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=5)
-                display_parole_on_screen(current_parole, )
+                print("checkAgain")
+                display_parole_on_screen(current_parole)
 
             if y < x:
                 print("Next day reached")
