@@ -206,7 +206,7 @@ def display_parole_on_screen(parole="", headline="Parole für heute:"):
 
     x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
 
-    black_image.text(5, 50, x[0], font=font_24, fill=0)
+    draw_black.text(5, 50, x[0], font=font_24, fill=0)
 
 
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
