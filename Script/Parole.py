@@ -309,7 +309,7 @@ def main():
             x = datetime.today()
 
             if z < x:
-                x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=1)
+                z = x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=1)
                 print("checkAgain")
                 check_status()
 
