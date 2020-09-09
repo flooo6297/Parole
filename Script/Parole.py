@@ -281,6 +281,8 @@ def check_status():
 
     print("checked again")
 
+    x = ""
+
     x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
 
     current_status = x[0]
