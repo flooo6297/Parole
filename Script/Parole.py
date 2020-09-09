@@ -32,6 +32,7 @@ epd.Clear()
 epd.sleep()
 
 current_parole = ""
+current_status = ""
 new_parole = ""
 
 generate_new_parole_screen_is_showing = False
@@ -147,6 +148,8 @@ def send_newsletters(predefined_parole=""):
 
 
 def display_parole_on_screen(parole="", headline="Parole für heute:"):
+    global current_status
+
     epd.init()
     # epd.Clear()
     black_image = Image.new('1', (epd.height, epd.width), 255)
@@ -190,25 +193,7 @@ def display_parole_on_screen(parole="", headline="Parole für heute:"):
             draw_black.text((margin, current_y), word, font=font_24, fill=0)
             current_y += text_size_y
 
-    crl = pycurl.Curl()
-    b_obj = BytesIO()
-    crl.setopt(crl.URL, 'https://www.mein-laborergebnis.de/ergebnis/b3476a18-df20-41bf-b69a-c24d36b1c245')
-
-    crl.setopt(crl.WRITEDATA, b_obj)
-
-    crl.perform()
-
-    crl.close()
-
-    get_body = b_obj.getvalue()
-
-    text = get_body.decode('utf8')
-
-    print("checked again")
-
-    x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
-
-    draw_black.text((5, 100), x[0], font=font_24, fill=0)
+        draw_black.text((5, 100), current_status, font=font_24, fill=0)
 
 
     epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
@@ -276,6 +261,33 @@ def init_buttons():
     GPIO.setup(button_4, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
+def check_status():
+    global current_status
+    global current_parole
+
+    crl = pycurl.Curl()
+    b_obj = BytesIO()
+    crl.setopt(crl.URL, 'https://www.mein-laborergebnis.de/ergebnis/b3476a18-df20-41bf-b69a-c24d36b1c245')
+
+    crl.setopt(crl.WRITEDATA, b_obj)
+
+    crl.perform()
+
+    crl.close()
+
+    get_body = b_obj.getvalue()
+
+    text = get_body.decode('utf8')
+
+    print("checked again")
+
+    x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
+
+    current_status = x[0]
+    if current_status != "Probe in Bearbeitung":
+        display_parole_on_screen(current_parole)
+
+
 def main():
     global current_parole
 
@@ -295,9 +307,9 @@ def main():
             x = datetime.today()
 
             if z < x:
-                x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=5)
+                x.replace(day=x.day, hour=x.hour, minute=x.minute, second=x.second, microsecond=x.microsecond) + timedelta(minutes=1)
                 print("checkAgain")
-                display_parole_on_screen(current_parole)
+                check_status()
 
             if y < x:
                 print("Next day reached")
