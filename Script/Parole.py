@@ -262,32 +262,34 @@ def init_buttons():
 
 
 def check_status(first=False):
-    global current_status
-    global current_parole
 
-    crl = pycurl.Curl()
-    b_obj = BytesIO()
-    crl.setopt(crl.URL, 'https://www.mein-laborergebnis.de/ergebnis/b3476a18-df20-41bf-b69a-c24d36b1c245')
+    if False:
+        global current_status
+        global current_parole
 
-    crl.setopt(crl.WRITEDATA, b_obj)
+        crl = pycurl.Curl()
+        b_obj = BytesIO()
+        crl.setopt(crl.URL, 'https://www.mein-laborergebnis.de/ergebnis/b3476a18-df20-41bf-b69a-c24d36b1c245')
 
-    crl.perform()
+        crl.setopt(crl.WRITEDATA, b_obj)
 
-    crl.close()
+        crl.perform()
 
-    get_body = b_obj.getvalue()
+        crl.close()
 
-    text = get_body.decode('utf8')
+        get_body = b_obj.getvalue()
 
-    print("checked again")
+        text = get_body.decode('utf8')
 
-    x = ""
+        print("checked again")
 
-    x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
+        x = ""
 
-    current_status = x[0]
-    if current_status != "Probe in Bearbeitung" or first:
-        display_parole_on_screen(current_parole)
+        x = re.findall("<div class=\"display-4 mb-4 ErgebnisText\">\n\s*(.*)\n.*</div>", text)
+
+        current_status = x[0]
+        if current_status != "Probe in Bearbeitung" or first:
+            display_parole_on_screen(current_parole)
 
 
 def main():
